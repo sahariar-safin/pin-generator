@@ -2,8 +2,12 @@
 // document.getElementById('genaret-pin').value = randomNumber;
 function genaretPin() {
     const randomNumber = (Math.random() * 10000 + '').split('.')[0];
-    document.getElementById('genaret-pin').value = randomNumber;
-    displayElement();
+    if (randomNumber.length === 4) {
+        document.getElementById('genaret-pin').value = randomNumber;
+        displayElement();
+    } else {
+        return genaretPin();
+    }
 }
 function numberInput(number) {
     const numberInput = document.getElementById('input-pin');
