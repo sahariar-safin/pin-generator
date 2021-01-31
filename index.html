@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="genaret-pin" class="form-control" type="text">
+                    <button onclick="genaretPin()" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="input-pin" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                                <button onclick="numberInput(7)" id="number" class="button">7</button>
+                                <button onclick="numberInput(8)" id="number" class="button">8</button>
+                                <button onclick="numberInput(9)" id="number" class="button">9</button>
+                            </div>
+                            <div class="calc-button-row">
+                                <button onclick="numberInput(4)" id="number" class="button">4</button>
+                                <button onclick="numberInput(5)" id="number" class="button">5</button>
+                                <button onclick="numberInput(6)" id="number" class="button">6</button>
+                            </div>
+                            <div class="calc-button-row">
+                                <button onclick="numberInput(1)" id="number" class="button">1</button>
+                                <button onclick="numberInput(2)" id="number" class="button">2</button>
+                                <button onclick="numberInput(3)" id="number" class="button">3</button>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button">.</div>
+                                <button onclick="numberInput(0)" id="number" class="button">0</button>
+                                <div onclick="clean()" class="button">C</div>
+                            </div>
+                            <div>
+                                <button onclick="submit()" id="submit" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left"> <span id="count-try">3</span> try left</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="notify-section">
+                <p id="try-again" class=" notify">❌ Pin Didn't Match, Please try again</p>
+                <p id="right-pin" class=" notify">✅ Pin Matched... Secret door is opening for you</p>
+            </div>
+        </div>
+
+        <script>
+            // const randomNumber = (Math.random() * 10000 + '').split('.')[0];
+            // document.getElementById('genaret-pin').value = randomNumber;
+            function genaretPin() {
+                const randomNumber = (Math.random() * 10000 + '').split('.')[0];
+                document.getElementById('genaret-pin').value = randomNumber;
+                displayElement();
+            }
+            function numberInput(number) {
+                const numberInput = document.getElementById('input-pin');
+                const currentNumber = numberInput.value + number + '';
+                numberInput.value = currentNumber;
+            }
+            function clean() {
+                document.getElementById('input-pin').value = '';
+                displayElement();
+            }
+            function submit() {
+                const numberInput = document.getElementById('input-pin').value;
+                const genaretPin = document.getElementById('genaret-pin').value;
+                const countTry = document.getElementById('count-try');
+                const countAmount = parseInt(countTry.innerText);
+                if (numberInput == genaretPin) {
+                    document.getElementById('right-pin').style.display = 'block';
+                }
+                if (numberInput != genaretPin && countAmount > 0) {
+                    document.getElementById('try-again').style.display = 'block';
+                    countTry.innerText = countAmount - 1;
+                }
+            }
+            function displayElement() {
+                document.getElementById('right-pin').style.display = 'none';
+                document.getElementById('try-again').style.display = 'none';
+            }
+        </script>
+
+</body>
+
+</html>
