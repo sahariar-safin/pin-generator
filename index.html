@@ -76,12 +76,14 @@
                 displayElement();
             }
             function submit() {
+                displayElement();
                 const numberInput = document.getElementById('input-pin').value;
                 const genaretPin = document.getElementById('genaret-pin').value;
                 const countTry = document.getElementById('count-try');
                 const countAmount = parseInt(countTry.innerText);
                 if (numberInput == genaretPin) {
                     document.getElementById('right-pin').style.display = 'block';
+                    countTry.innerText = 3;
                 }
                 if (numberInput != genaretPin && countAmount > 0) {
                     document.getElementById('try-again').style.display = 'block';
