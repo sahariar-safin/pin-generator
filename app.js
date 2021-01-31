@@ -4,6 +4,7 @@ function genaretPin() {
     const randomNumber = (Math.random() * 10000 + '').split('.')[0];
     if (randomNumber.length === 4) {
         document.getElementById('genaret-pin').value = randomNumber;
+        clean();
         displayElement();
     } else {
         return genaretPin();
